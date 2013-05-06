@@ -123,16 +123,16 @@ if __name__ == "__main__":
     vf = VideoFiles(args.path)
 
     for videoFile in vf.filenames:
-        if args.hash:
-            raise NotImplementedError
-        else:
-            osresult = osd.find({'sublanguageid': args.language, 'query': videoFile})
-            if osresult is not None and osresult is not False:
-                # for subEntry in osresult:
-                #     print subEntry["SubDownloadLink"]
-                #get first one
-                if not hasSubtitles(vf.path + os.sep + videoFile) or args.force:
+        if not hasSubtitles(vf.path + os.sep + videoFile) or args.force:
+            if args.hash:
+                raise NotImplementedError
+            else:
+                osresult = osd.find({'sublanguageid': args.language, 'query': videoFile})
+                if osresult is not None and osresult is not False:
+                    # for subEntry in osresult:
+                    #     print subEntry["SubDownloadLink"]
+                    #get first one
                     subUrl = osresult[0]["SubDownloadLink"]
                     downloadUrlFile(subUrl, vf.path, os.path.splitext(videoFile)[0])
-            else:
-                print "no sub found for " + videoFile
+                else:
+                    print "no sub found for " + videoFile
