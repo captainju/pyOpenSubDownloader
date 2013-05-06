@@ -68,8 +68,6 @@ class VideoFiles():
                     if mimetypes.guess_type(path+os.sep+filePath)[0].split('/')[0] == 'video':
                         self.filenames.append(filePath)
                         self.path = os.path.dirname(os.path.abspath(path+os.sep+filePath))
-                    else:
-                        print filePath + " iz not a video file"
                 except:
                     None
         else:
