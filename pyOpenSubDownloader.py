@@ -130,7 +130,22 @@ if __name__ == "__main__":
                     # for subEntry in osresult:
                     #     print subEntry["SubDownloadLink"]
                     #get first one
-                    subUrl = osresult[0]["SubDownloadLink"]
+                    subUrl = ""
+                    dlCount = 0
+                    isVip = False
+                    for res in osresult:
+                        if res["UserRank"] == "vip plus member":
+                            if not isVip:
+                                dlCount = 0
+                            isVip = True
+                            if res["SubDownloadsCnt"] > dlCount:
+                                dlCount = res["SubDownloadsCnt"]
+                                subUrl = res["SubDownloadLink"]
+                        else:
+                            if not isVip:
+                                if res["SubDownloadsCnt"] > dlCount:
+                                    dlCount = res["SubDownloadsCnt"]
+                                    subUrl = res["SubDownloadLink"]
                     downloadUrlFile(subUrl, vf.path, os.path.splitext(videoFile)[0])
                 else:
                     print "no sub found for " + videoFile
