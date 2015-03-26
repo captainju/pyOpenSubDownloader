@@ -15,7 +15,7 @@ import gzip
 
 class Configuration(object):
     OPEN_SUBTITLES_URL = "http://api.opensubtitles.org/xml-rpc"
-    OPEN_SUBTITLES_USER_AGENT = "OS Test User Agent"
+    OPEN_SUBTITLES_USER_AGENT = "OSTestUserAgent"
 
 
 class OpenSubDownloader():
